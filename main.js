@@ -7,11 +7,13 @@
   const hoursElement = document.getElementById('hours');
   const minutesElement = document.getElementById('minutes');
   const secondsElement = document.getElementById('seconds');
+  const borderElement = document.getElementById('border');
 
   function runClock () {
     var dateObject = logDate();
     clockFace(dateObject);
-    changeBodyBG(dateObject);
+    changeBodyBG(dateObject[2]);
+    growBorder(dateObject[2]);
   }
 
   function logDate () {
@@ -35,11 +37,16 @@
     secondsElement.textContent = ('0' + dateObject[2]).slice(-2);
   }
 
-  function changeBodyBG (dateObject) {
+  function changeBodyBG (dateSeconds) {
     // var color = allTheColors[Math.floor(Math.random() * allTheColors.length)];
-    var hue = (dateObject[2] * 30);
+    var hue = (dateSeconds * 30);
     var color = 'hsl(' + hue + ', 90%, 90%)';
     document.querySelector('body').style.background = color;
+  }
+
+  function growBorder (dateSeconds) {
+    var borderElementWidth = ((dateSeconds / 60) * 100) + '%';
+    document.getElementById('border').style.width = borderElementWidth;
   }
 
   function replaceClockFace () {
@@ -54,6 +61,7 @@
     minutesElement.textContent = currentBGColor.slice(2, 4);
     secondsElement.textContent = currentBGColor.slice(4, 6);
   }
+
   // https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
   function rgb2hex (red, green, blue) {
     var rgb = blue | (green << 8) | (red << 16);

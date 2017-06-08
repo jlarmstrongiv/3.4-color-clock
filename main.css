@@ -4,13 +4,24 @@
 }
 #clock {
   text-align: center;
-  font-size: 5em;
-  width: 100%;
+  font-size: 17vw;
+  background-color: rgba(0, 0, 0, 0);
+  top: 0;
+  right: 0;
+  left: 0;
+  transition: all ease-in-out 0.6s;
+}
+#border {
+  height: 1.15vw;
+  background-color: rgba(0,0,0,.75);
+  margin: 0 auto;
+  display: block;
 }
 body {
   height: 100vh;
   width: 100vw;
-  transition:all ease-in-out 0.6s;
+  transition: background ease-in-out 0.6s;
   font-family: 'Droid Sans Mono', monospace;
-  color: rgba(0,0,0,.75)
+  color: rgba(0,0,0,.75);
+  position: relative;
 }
