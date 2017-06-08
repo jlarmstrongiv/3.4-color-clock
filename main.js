@@ -9,11 +9,17 @@
   const secondsElement = document.getElementById('seconds');
   const borderElement = document.getElementById('border');
 
+  var isHoveringVar = false;
+
   function runClock () {
     var dateObject = logDate();
-    clockFace(dateObject);
     changeBodyBG(dateObject[2]);
     growBorder(dateObject[2]);
+    if (!isHoveringVar) {
+      clockFace(dateObject);
+    } else {
+      replaceClockFace();
+    }
   }
 
   function logDate () {
@@ -46,7 +52,7 @@
 
   function growBorder (dateSeconds) {
     var borderElementWidth = ((dateSeconds / 60) * 100) + '%';
-    document.getElementById('border').style.width = borderElementWidth;
+    borderElement.style.width = borderElementWidth;
   }
 
   function replaceClockFace () {
@@ -70,6 +76,15 @@
 
   window.setInterval(runClock, 1000);
 
+  function isHoveringFunc () {
+    isHoveringVar = true;
+  }
+  function isNotHoveringFunc () {
+    isHoveringVar = false;
+  }
+
   var clockElement = document.getElementById('clock');
-  clockElement.addEventListener('mouseover', replaceClockFace);
+  clockElement.addEventListener('mouseover', isHoveringFunc);
+  clockElement.addEventListener('mouseout', isNotHoveringFunc);
+
 }());
